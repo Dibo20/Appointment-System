@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>Appointment System</title>
+
+<style>
+body {
+font-family: Arial;
+background: #f4f6f9;
+direction: rtl;
+text-align: right;
+padding: 40px;
+}
+
+.container {
+background: white;
+max-width: 500px;
+margin: auto;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+input, select, button {
+width: 100%;
+padding: 10px;
+margin-top: 10px;
+margin-bottom: 15px;
+}
+
+button {
+background: #004b8d;
+color: white;
+border: none;
+cursor: pointer;
+}
+
+button:hover {
+background: #003366;
+}
+
+.success {
+background: #d4edda;
+padding: 10px;
+margin-top: 15px;
+border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Traffic Violation Appointment system</h2>
+
+<!-- ✅ الفورم الحقيقي -->
+<form id="form" enctype="multipart/form-data">
+
+<input type="text" name="name" placeholder="Full Name" required>
+
+<input type="text" name="nationalId" placeholder="Badge number" required>
+
+<select name="violation" required>
+<option value="">violation type</option>
+<option>Not using seat belt</option>
+<option>Double Parking</option>
+<option>Parking in reverse</option>
+<option>Turning from the wrong lane</option>
+<option>Failure to yield the right-of-way</option>
+<option>Parking in an unauthorized space</option>
+<option>Failure to obey stop sign</option>
+<option>Dark glass tint above limits</option>
+</select>
+
+<label>Upload ticket picture</label>
+<input type="file" name="image" accept="image/*" required>
+
+<select name="timeSlot" required>
+<option value="">appointment time</option>
+<option>08:00</option>
+<option>08:15</option>
+<option>08:30</option>
+<option>08:45</option>
+<option>09:00</option>
+<option>09:15</option>
+<option>09:30</option>
+<option>09:45</option>
+</select>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+document.getElementById("form").addEventListener("submit", async function(e){
+e.preventDefault();
+
+let formData = new FormData(this);
+
+try {
+let res = await fetch("/book", {
+method: "POST",
+body: formData
+});
+
+let data = await res.json();
+
+document.getElementById("result").innerHTML =
+`<div class="success">
+تم الحجز بنجاح<br>
+رقم الحجز: <b>${data.ref}</b><br>
+وقت الموعد: ${data.slot}
+</div>`;
+
+} catch (err) {
+alert("حدث خطأ");
+}
+
+});
+
+</script>
+
+</body>
+</html>
