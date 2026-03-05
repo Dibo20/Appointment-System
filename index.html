@@ -56,11 +56,11 @@ border-radius: 5px;
 <h2>Traffic Violation Appointment System</h2>
 
 <!-- ✅ الفورم الحقيقي -->
-<form id="form" enctype="multipart/form-data">
+<form action="/book" method="POST">
 
 <input type="text" name="name" placeholder="Full Name" required>
 
-<input type="text" name="nationalId" placeholder="Badge number" required>
+<input type="text" name="id" placeholder="Badge number" required>
 
 <select id="violation" name="violation" required>
 <option value="">violation type</option>
@@ -75,9 +75,9 @@ border-radius: 5px;
 </select>
 
 <label>Upload ticket picture</label>
-<input type="file" name="image" accept="image/*" required>
+<input type="file" name="image" accept="image/*">
 
-<select name="timeSlot" required>
+<select name="time" required>
 <option value="">appointment time</option>
 <option>08:00</option>
 <option>08:15</option>
