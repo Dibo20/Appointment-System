@@ -58,9 +58,17 @@ border-radius: 5px;
 <!-- ✅ الفورم الحقيقي -->
 <form action="/book" method="POST">
 
-<input type="text" name="name" placeholder="Full Name" required>
+<input 
+type="text" 
+name="name" 
+placeholder="Full Name" 
+required>
 
-<input type="text" name="id" placeholder="Badge number" required>
+<input 
+type="text" 
+name="id" 
+placeholder="Badge number" 
+required>
 
 <select id="violation" name="violation" required>
 <option value="">violation type</option>
@@ -75,7 +83,10 @@ border-radius: 5px;
 </select>
 
 <label>Upload ticket picture</label>
-<input type="file" name="image" accept="image/*">
+<input 
+type="file" 
+name="image" 
+accept="image/*">
 
 <select name="time" required>
 <option value="">appointment time</option>
@@ -93,39 +104,10 @@ border-radius: 5px;
 
 </form>
 
-<div id="result"></div>
 
 </div>
 
-<script>
 
-document.getElementById("form").addEventListener("submit", async function(e){
-e.preventDefault();
-
-let formData = new FormData(this);
-
-try {
-let res = await fetch("/book", {
-method: "POST",
-body: formData
-});
-
-let data = await res.json();
-
-document.getElementById("result").innerHTML =
-`<div class="success">
-تم الحجز بنجاح<br>
-رقم الحجز: <b>${data.ref}</b><br>
-وقت الموعد: ${data.slot}
-</div>`;
-
-} catch (err) {
-alert("حدث خطأ");
-}
-
-});
-
-</script>
 
 </body>
 </html>
