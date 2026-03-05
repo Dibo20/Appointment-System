@@ -41,13 +41,13 @@ const server = http.createServer((req, res) => {
 
             if (!data.name || !data.id || !data.time) {
                 res.writeHead(400);
-                return res.end('❌ بيانات ناقصة');
+                return res.end('incomplete information ❌');
             }
 
             const exists = appointments.find(a => a.time === data.time);
             if (exists) {
                 res.writeHead(400);
-                return res.end('❌ الموعد محجوز');
+                return res.end('The appointment is not available ❌');
             }
 
             appointments.push({
@@ -59,7 +59,7 @@ const server = http.createServer((req, res) => {
             fs.writeFileSync(DATA_FILE, JSON.stringify(appointments, null, 2));
 
             res.writeHead(200);
-            res.end('✅ تم الحجز');
+            res.end('Done ✅');
         });
     }
 
